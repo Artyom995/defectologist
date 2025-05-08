@@ -119,6 +119,17 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(0);
+        }
+        
+        .header.hidden {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body>
@@ -834,6 +845,31 @@
                     });
                 }
             });
+        });
+    </script>
+    <script>
+        const header = document.querySelector('.header');
+        const parentsSection = document.querySelector('#parents');
+        let lastScroll = 0;
+    
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // Показываем шапку до достижения секции "Родителям"
+            const parentsOffset = parentsSection.offsetTop;
+            
+            if (currentScroll <= parentsOffset - 100) {
+                header.classList.remove('hidden');
+            } else {
+                // Скрываем шапку при прокрутке вниз, показываем при прокрутке вверх
+                if (currentScroll > lastScroll && currentScroll > 100) {
+                    header.classList.add('hidden');
+                } else if (currentScroll < lastScroll) {
+                    header.classList.remove('hidden');
+                }
+            }
+            
+            lastScroll = currentScroll;
         });
     </script>
 </body>
