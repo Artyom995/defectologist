@@ -19,7 +19,12 @@
             background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 100%);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+        .header {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
         .nav-link {
             transition: all 0.3s ease;
             position: relative;
